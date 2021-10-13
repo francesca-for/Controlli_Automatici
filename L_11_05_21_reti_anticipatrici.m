@@ -9,7 +9,7 @@ close all
 clc
 
 s=tf('s');
-F=10/s*(s+2)*(s+4)  % di tipo 1, ha solo un polo nell'origine
+F=10/(s*(s+2)*(s+4))  % di tipo 1, ha solo un polo nell'origine
 Kf=dcgain(s*F)   % Kf = 10/8
 Kr=1;
 

@@ -1,0 +1,4 @@
+Caso in cui abbiamo fase che va bene ma modulo troppo elevato
+non possiamo usare reti anticipatrici perchè fanno aumentare il modulo e non
+posso nemmeno ridurre Kc perchè potrei non soddisfare più altre specifiche
+-> Uso quindi reti integrative (o attrenuatrici)
