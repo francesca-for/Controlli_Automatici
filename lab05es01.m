@@ -8,11 +8,11 @@ F=(s^2+11*s+10)/(s^4+4*s^3+8*s^2)
 
 % Kc controllore statico di guadagno (da definire)
 %
-%                      d1           d2
-%                      |            |
-%    r(s)-->O--> Kc -->O--> F(s) -->O-- y(s) -->
-%           ^                            |
-%         - |_____ 1/Kr _________________|
+%                         d1             d2
+%                         |              |
+%    r(s)--->O---> Kc --->O---> F(s) --->O--- y(s) --->
+%            ^                                 |
+%          - |____________ 1/Kr _______________|
 
 Kr=1;
 
@@ -77,7 +77,7 @@ Wd2=feedback(1,Ga)
 
 % caso 1
 % r1=t, errore di inseguimento intrinseco NULLO perche' il sistema e' di tipo 2
-% d2=0.5 costante agisce sull'uscita, ho efetto sull'uscita nullo perche' ho
+% d2=0.5 costante agisce sull'uscita, ho effetto sull'uscita nullo perche' ho
 % almeno un polo nell'origine a monte del disturbo
 % d1=0.1 costante, ha effetto d1/(Kc/Kr) perche' ci sono poli solo nel blocco a
 % valle del disturbo
@@ -139,4 +139,3 @@ errore_tot=errore_r-(effetto_d1+effetto_d2)
 
 open_system('lab05es1e_errore_inseguimento')
 sim('lab05es1e_errore_inseguimento')
-
