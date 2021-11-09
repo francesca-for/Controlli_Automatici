@@ -23,6 +23,7 @@ Kr=1;
 %   *   sovraelongazione massima della risposta al gradino unitario non
 %       superiore al 25%
 
+%%
 % si inizia analizzando le specifiche statiche
 % Sistema di tipo 1 e riferimento di grado 1 -> errore intrinseco di
 % inseguimento limitato senza necessita' di inserire poli nel controllore
@@ -53,7 +54,7 @@ mf_min = 60-5*(20*log10(Mr_max))
 pause;
 
 
-% ---- Ora possimo imopstare il progetto in matlab ----
+%% ---- Ora possimo impostare il progetto in matlab ----
 
 % definiamo la funzione d'anello di partenza
 Ga1 = Kc*F;  % Kc = 4, valore minimo ammissibile e eventualmente aumentabile successivamente
@@ -107,8 +108,8 @@ figure,step(W);     % simulo la risposta al gradino
 
 % ---- SIMULINK ----
 %
-%                       <errore>     <comando>
+%                       [errore]     [comando]
 %    _____      ____        |    _____   |    _____
-%   | rif |--->| Kr |--->O--.-->|  C  |--.-->|  F  |---.----<uscita>
+%   | rif |--->| Kr |--->O--.-->|  C  |--.-->|  F  |---.----[uscita]
 %    -----      ----   + ^       -----        -----    |
 %                      - |_____________________________|

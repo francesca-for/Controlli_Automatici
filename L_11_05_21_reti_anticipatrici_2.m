@@ -24,19 +24,19 @@ Kc = Kr/(Kf*0.2)   % Kc>0 per garantire la stabilizzabilita' del sistema (con C(
 
 Ga1 = Kc*F;
 bode(Ga1)
-pause;
 
-w_cd=3.8;
+%%
+wc=3.8;
 
 md1=3;
 xd1=1.3;
-tau_d1 = xd1/w_cd;
-Rd1 = (1+tau_d1*s)/(1+tau_d1/md1*s)  % RETE DERIVATIVA con md=3 centrata sum massimo recupero di fase e con w_cd=3.8
+tau_d1 = xd1/wc;
+Rd1 = (1+tau_d1*s)/(1+tau_d1/md1*s)  % RETE DERIVATIVA con md=3 centrata sum massimo recupero di fase e con wc=3.8
 
 md2=4;
 xd2=1.16;
-tau_d2 = xd2/w_cd;
-Rd2 = (1+tau_d2*s)/(1+tau_d2/md2*s)  % RETE DERIVATIVA con md=4 centrata sum massimo recupero di fase e con w_cd=3.8
+tau_d2 = xd2/wc;
+Rd2 = (1+tau_d2*s)/(1+tau_d2/md2*s)  % RETE DERIVATIVA con md=4 centrata sum massimo recupero di fase e con wc=3.8
 
 Ga2 = Ga1 * Rd1 * Rd2;  % in questo caso ho due diverse reti Rd1 e Rd2
 figure,margin(Ga2)
