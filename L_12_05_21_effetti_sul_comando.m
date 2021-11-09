@@ -38,10 +38,12 @@ figure,step(W)  % per specifica sulla risposta al gradino
 
 % preso da: L_12_05_21_reti_integro-derivative
 
-%% Attività sul comando
+%% Attività sul comando - calcolo (solo se non ho poli in  s=0)
 umax = Kc*md/mi;   % prodotto delle reti derivative / prodotto delle integrative
+
+%% Attività sul comando - simulato con Matlab
 Wu = C*feedback(1,Ga3)   % Wu = C*1/(1+Ga3)
 figure,step(Wu)  % il valore iniziale è anche il massimo, lo ottengo con peak response
 
-%% Attività sul comando con simulink
+%% Attività sul comando - simulato con Simulink
 open_system('L_12_05_21_effetti_sul_comando_schema')
