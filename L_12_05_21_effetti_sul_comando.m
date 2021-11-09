@@ -38,7 +38,7 @@ figure,step(W)  % per specifica sulla risposta al gradino
 
 % preso da: L_12_05_21_reti_integro-derivative
 
-%% Attività sul comando - calcolo (solo se non ho poli in  s=0)
+%% Attività sul comando - calcolo (solo se non ho poli in s=0 nel controllore)
 umax = Kc*md/mi;   % prodotto delle reti derivative / prodotto delle integrative
 
 %% Attività sul comando - simulato con Matlab
