@@ -151,3 +151,11 @@ figure,step(W);
 % Vedo che ora la specifica sulla sovraelongazione è soddisfatta e questo
 % non ha avuto conseguenze sul tempo di salita che continua ad andare bene
 % (era richiesto 0.2s con tolleranza 20%)
+
+
+%% verifica tramite simulazione delle specifiche sugli effetti dei disturbi e err. di inseguimento
+open_system('L_12_05_21_Esercizio_progetto_di_un_controllore_schema');
+
+%% 34:30 lezione del 14/05
+
+
