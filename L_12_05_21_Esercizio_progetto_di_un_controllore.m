@@ -116,8 +116,38 @@ figure,step(W);   % tutte le specifiche dinamiche erano state formulate sulla ri
 % andavano bene
 % Quindi la wc che abbiamo ottenuto così va bene e la manterremo tale
 
-% Quando invece si ha una sovraelongazione molto maggiore di quella che ci
-% si aspettava (come in questo caso), ...
+% Abbiamo una sovraelongazione molto maggiore di quella che ci
+% aspettavamo quindi dobbiamo rivedere la scelta delle reti anticipatrici
 
 
+%% S E C O N D O   T  E N T A T I V O
+% Usiamo delle reti più forti, usiamo due anticipatrici da 4
+md = 4;
+xd = 1.2;
+taud = xd/wcd;
+Rd = (1+taud*s)/(1+taud/md*s);
 
+Ga2 = Ga1 * Rd^2;
+
+[m2,f2] = bode(Ga2,wcd)
+
+%% Rete attenuatrice
+mi = 1.6;
+xi = 30;
+taui = xi/wcd;
+Ri = (1+taui/mi*s)/(1+taui*s);
+Ga3 = Ga2 * Ri;
+
+%% A questo punto il progetto dovrebbe essere completo, uso margin per verificare wc e mf
+
+figure,margin(Ga3)
+% ho soddisfatto i requisiti sulla funzione d'anello
+% posso provare a chiudere l'anello
+%%
+C = Kc/s*Rd^2*Ri;
+W = feedback(C*F1*F2,1/Kr);
+figure,step(W);
+
+% Vedo che ora la specifica sulla sovraelongazione è soddisfatta e questo
+% non ha avuto conseguenze sul tempo di salita che continua ad andare bene
+% (era richiesto 0.2s con tolleranza 20%)
