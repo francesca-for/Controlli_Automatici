@@ -92,9 +92,9 @@ open_system('Lab07es01_schema')
 
 % errore di inseguimento massimo a r = sin(0.1*t)
 sens = feedback(1,Ga3);
-Wsens_e = 1/Kr * sens;
 
-[ms1, fs1] = bode(Wsens_e,0.1)
+[ms1, fs1] = bode(sens,0.1)*Kr
 
-% attenuazione con la quale vengono riportati sull'uscita disturbi sinusoidali entranti insieme al riferimento r(t) e aventi pulsazione maggiore o uguale a 100 rad/s
-[ms2, fs2] = bode(Wsens_e,100)
+% attenuazione con la quale vengono riportati sull'uscita disturbi sinusoidali entranti insieme al riferimento r(t)
+% e aventi pulsazione maggiore o uguale a 100 rad/s
+[ms2, fs2] = bode(sens,100)*Kr
