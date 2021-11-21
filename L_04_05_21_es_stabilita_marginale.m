@@ -1,10 +1,11 @@
 clear all
 close all
+clc
 
 s=tf('s');
 
 Ga=1e6*(s+2)*(s+20)/(s^2*(s+1)*(s+200)*(s+500));
-Kga=dcgain(s^2*Ga);
+Kga=dcgain(s^2*Ga)
 bode(Ga)
 figure,nyquist(Ga)
 figure,margin(Ga)
@@ -29,7 +30,6 @@ figure,margin(Ga)
 % IN QUESTO CASO USARE IL COMANDO MARGIN NON CI DA' IL RISULTATO CORRETTO,
 % MA UNO PARZIALE. QUESTO PERCHE' CI SONO DUE VALORI DI FASE E PRENDE SOLO
 % IL PRIMO CHE TROVA.
-% VALORE CHE TROVA
 
 %%
 % ESEMPIO 2: piu' pulsazioni a cui |Ga(s)|=1

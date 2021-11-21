@@ -3,11 +3,12 @@ close all
 s = tf('s');
 
 F1 = 1/(s*(s+2)*(s+4));
-Kf1 = dcgain(s*F1);  % calcolo guadagno stazionario
+Kf1 = dcgain(s*F1)  % calcolo guadagno stazionario
 bode(F1);
 
+%%
 F2 = 10/s*F1; % E' di tipo 2. Poli in 0(2), -2, -4
-Kf2 = dcgain(s^2*F2);
+Kf2 = dcgain(s^2*F2)
 % phi_0 = -90*2 = -180
 % phi_inf = -180-90*2 = -360
 figure,bode(F2);
@@ -19,9 +20,10 @@ figure,bode(F2);
 % Il diagramma è come quello di F1 ma ruotato di -90°, il contributo del 10
 % al numeratore non è immediatamente apprezzabile.
 
+%%
 F3 = F2*(s+1); % la funzione ha uno zero reale negativo in -1, poli reali 
                % in 0(2), -2, -4
-Kf3 = dcgain(s^2*F3);
+Kf3 = dcgain(s^2*F3)
 % phi_0 = -90*2 + fase(Kf3) = -180
 % phi_inf = -180+90-90*2 = -270   ho un aumento di fase e poi una
 % diminuzione, ed e' quello che si vede dal DdB della fase

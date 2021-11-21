@@ -20,15 +20,15 @@ Kr=1;
 Kf=dcgain(s^2*F)
 
 %zeri e poli
-zero(F)
-pole(F)
+zeri = zero(F)
+poli = pole(F)
 damp(F)
 
 %% punto b - Bode
 
 % considerazioni: Kf è positivo, quindi non darà contributo in termini di
-% sfasamento di fase, zeri < 0, polo doppio nell'origine e coppia di compl.
-% coniugati con pulsazion e di risonanza in 2.82 e smorzamento 0.707
+% sfasamento di fase, zeri < 0, polo doppio nell'origine e coppia di complessi
+% coniugati con pulsazione di risonanza in 2.82 e smorzamento 0.707
 % La fase iniziale vale -180, dovuto al polo doppio nell'origine
 % Il modulo parte scendendo con -40 dB/dec, poi ho l'effetto del primo zero
 % che lo fa risalire un poco, ho l'effetto della coppia di complessi
