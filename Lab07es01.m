@@ -21,7 +21,7 @@ poli = pole(F)
 h=1;
 % per avere effetto del disturbo finito mi basterebbe sistema di tipo 0, con il polo aggiunto in C avremo effetto nullo
 
-% err = Kr/Kga = Kr/(Kc*Kf/Kga)
+% err = Kr/Kga = Kr/(Kc*Kf/Kr)
 Kc = 1/(0.01*Kf)
 
 % segno di Kc: il sistema è stabilità regolare, Kf positivo e non ho singolarità a parte reale positiva
@@ -49,7 +49,7 @@ figure,bode(Ga)
 % con parametro mi > 10 (già così sono al limite, le reti derivative lo
 % faranno crescere ancora)
 
-%% Reti derivative
+%% Reti anticipatrici
 % provo con 2 reti da 4 sul fronte di salita
 
 md = 4;
@@ -93,8 +93,10 @@ open_system('Lab07es01_schema')
 % errore di inseguimento massimo a r = sin(0.1*t)
 sens = feedback(1,Ga3);
 
-[ms1, fs1] = bode(sens,0.1)*Kr
+[ms1, fs1] = bode(sens,0.1);
+e_rif_sin = ms1*Kr
 
 % attenuazione con la quale vengono riportati sull'uscita disturbi sinusoidali entranti insieme al riferimento r(t)
 % e aventi pulsazione maggiore o uguale a 100 rad/s
-[ms2, fs2] = bode(sens,100)*Kr
+[ms2, fs2] = bode(W,100);  % la fdt tra disturbo e uscita è proprio la funzione di catena chiusa W, la valutiamo quindi alla pulsazione 100
+att_d_sin = ms2
