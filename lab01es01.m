@@ -2,7 +2,7 @@ clear all
 close all
 clc
 
-es=menu('Simulazione della riaposta del sistema meccanico',...
+es=menu('Simulazione della risposta del sistema meccanico',...
         '1.a) beta=0.1, K=2,  x0=[0;0],   F(t)=1;',...
         '1.b) beta=0.01, K=2,  x0=[0;0],   F(t)=1;',...
         '1.c) beta=10,   K=20, x0=[0;0],   F(t)=1;',...
@@ -13,14 +13,14 @@ es=menu('Simulazione della riaposta del sistema meccanico',...
         '2.d) beta=0.1,  K=2,  x0=[0;0.2], F(t)=cos(4t)' );
 
 switch es
-        case 1, beta=0.1;  k=2;  x0=[0;0];   w0=0; tmax=20;
-        case 2, beta=0.01; k=2;  x0=[0;0];   w0=0; tmax=200;
-        case 3, beta=10;   k=20; x0=[0;0];   w0=0; tmax=10;
-        case 4, beta=0.1;  k=2;  x0=[0;0.2]; w0=0; tmax=20;
-        case 5, beta=0.1;  k=2;  x0=[0;0];   w0=4; tmax=10;
-        case 6, beta=0.01; k=2;  x0=[0;0];   w0=4; tmax=10;
-        case 7, beta=10;   k=20; x0=[0;0];   w0=4; tmax=10;
-        case 8, beta=0.1;  k=2;  x0=[0;0.2]; w0=4; tmax=10;
+        case 1, beta=0.1;  k=2;  x0=[0;0];   w0=0;
+        case 2, beta=0.01; k=2;  x0=[0;0];   w0=0;
+        case 3, beta=10;   k=20; x0=[0;0];   w0=0;
+        case 4, beta=0.1;  k=2;  x0=[0;0.2]; w0=0;
+        case 5, beta=0.1;  k=2;  x0=[0;0];   w0=4;
+        case 6, beta=0.01; k=2;  x0=[0;0];   w0=4;
+        case 7, beta=10;   k=20; x0=[0;0];   w0=4;
+        case 8, beta=0.1;  k=2;  x0=[0;0.2]; w0=4;
 end
 
 m = 0.2;
