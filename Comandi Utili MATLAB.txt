@@ -1,0 +1,17 @@
+COMANDI UTILI - parte 1
+
+system = ss(A, B, C, D);     -> state-space model
+
+[Y,T,X] = lsim(SYS,U,T,X0);     -> simula il comportamento di un sistema LTI
+
+[NUM,DEN] = ss2tf(A,B,C,D,iu)     -> state-space to transfer function
+                                     iu = indice dell'ingresso, 1 <= in <= p = #ingressi
+
+system = tf([coeff. num],[coeff. den]);     -> crea una transfer functions
+s = tf('s');     -> crea un oggetto di tipo transfer function, il polinomio s
+
+[num,den] = tfdata(system, 'v);     -> system = tf della risposta Y, 'v' indica che vogliamo ottenere una forma polinomiale (vettoriale)
+
+[residui,poli,K] = residue(num,den)     -> calcolo dei residui della scomposizione in fratti semplici, K = eventuale resto della divisione polinomiale
+
+.
