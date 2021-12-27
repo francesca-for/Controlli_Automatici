@@ -62,7 +62,7 @@ clc
 
 s=tf('s');
 
-wn_z = [2,0.5; 2,0.25; 1,0.5]; 
+wn_z = [2,0.5; 2,0.25; 1,0.5];
 
 for i = 1:1:3
     wn = wn_z(i,1);
@@ -76,5 +76,3 @@ for i = 1:1:3
     % ts = 1/(wn*sqrt(1-z^2)) * (pi-arccos(z))
 end
 hold off
-
-
