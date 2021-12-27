@@ -73,6 +73,6 @@ for i = 1:1:3
 
 
     sovrael_max = exp(-pi*z/sqrt(1-z^2))
-    % ts = 1/(wn*sqrt(1-z^2)) * (pi-arccos(z))
+    ts = 1/(wn*sqrt(1-z^2)) * (pi-acos(z))
 end
 hold off
