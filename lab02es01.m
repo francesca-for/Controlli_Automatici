@@ -1,19 +1,24 @@
-% Sistemi dinamici SISO LTI, risposte all'impulso e al gradino
+% Sistemi dinamici SISO LTI del primo ordine, risposte all'impulso e al gradino
+
+clear variables
+close all
+clc
 
 s=tf('s');
 
-H1=10/(s-5);
-H2=10/s;
-H3=10/(s+5);
-H4=10/(s+20);
+fdt = menu('Sistemi dinamici SISO LTI:', ...
+           'G1(s) = 10/(s-5)', ...
+           'G2(s) = 10/s', ...
+           'G3(s) = 10/(s+5)', ...
+           'G4(s) = 10/(s+20)');
 
-figure(1), impulse(H1,'r');
-figure(2), impulse(H2,'r');
-figure(3), impulse(H3,'r');
-figure(4), impulse(H4,'r');
-pause;
+switch fdt
+    case 1, G = 10/(s-5);
+    case 2, G = 10/s;
+    case 3, G = 10/(s+5);
+    case 4, G = 10/(s+20);
+end
 
-figure(1), step(H1,'g');
-figure(2), step(H2,'g');
-figure(3), step(H3,'g');
-figure(4), step(H4,'g');
+figure(1), impulse(G);
+
+figure(2), step(G);
