@@ -14,4 +14,9 @@ s = tf('s');     -> crea un oggetto di tipo transfer function, il polinomio s
 
 [residui,poli,K] = residue(num,den)     -> calcolo dei residui della scomposizione in fratti semplici, K = eventuale resto della divisione polinomiale
 
-.
+Mr = ctrb(A,B)     -> calcola la matrice di raggiungibilità del sistema
+
+Mo = obsv(A,C)     -> calcola la matrice di osservabilità del sistema
+
+
+
