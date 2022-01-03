@@ -11,24 +11,22 @@ F1 = Ka*Km/(s^2*J*La+s*(beta*La+J*Ra)+beta*Ra+Km^2)
 F2 = -(s*La+Ra)/(s^2*J*La+s*(beta*La+J*Ra)+beta*Ra+Km^2)
 
 %% simulazione del sistema in catena aperta
-open_system('lab04es01a_schema');
+open_system('lab04es02a_schema');
 
 %% simulazione del sistema in catena chiusa
 Kc1 = 0.1;
 Kc2 = 1;
 Kc3 = 5;
-open_system('lab04es01b_schema');
+open_system('lab04es02b_schema');
 
-%% Calcolare la fdt del sistema controllato w/wrif per Td(s)=0 e tracciarne i DdB 
+%% Calcolare la fdt del sistema controllato θ/θrif per Td(s)=0 e tracciarne i DdB
 
-for Kc = [Kc1,Kc2,Kc3]
+for Kc = [Kc1, Kc2, Kc3]
     fprintf("Kc = %d", Kc);
-    W = feedback(Kc*F1,1)
-    zeri = zero(W)
-    poli = pole(W)
+    W = feedback(Kc*F1*(1/s),1)
+    zeri =zero(W)
+    poli =pole(W)
     damp(W)
-    bode(W),grid on,hold on
-    pause
+    bode(W), grid on, hold on
+    pause;
 end
-
-
