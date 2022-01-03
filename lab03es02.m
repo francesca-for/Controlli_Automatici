@@ -110,15 +110,14 @@ axis_orig=axis;
 axis([0,0.2,axis_orig(3:4)]);
 
 
-% COMMENTI: 
+% COMMENTI:
 % grafico 1: uscite e riferimento
 % grafico 2: primi 2 decimi di secondo del primo grafico, le risposte
-%            stimate sono rappresentate tratteggiate. Notiamo che queste partono 
+%            stimate sono rappresentate tratteggiate. Notiamo che queste partono
 %            da zero ma dopo 0.02 secondi coincidono con le uscite reali
 % grafico 3: variabile di stato x1, notiamo che ha un andamento analogo a
 %            quello di y. Guardando la matrice C vediamo che vale [600,0],
 %            quindi l'uscita vale 600 volte x1 (sono proporzionali)
 % grafico 5: x2 è la velocità, Non viene misurata direttamente. L'andamento
 %            zoomato è rappresentato nel grafico 6 (primi 2 decimi di secondo di simulazione)
-%            Dopo circa 0.04 secondi lo stima di x2 coincide con il valore di x2 
-
+%            Dopo circa 0.04 secondi lo stima di x2 coincide con il valore di x2
