@@ -1,4 +1,4 @@
-clear all
+clear variables
 close all
 clc
 
@@ -27,8 +27,8 @@ damp(F)
 %% punto b - Bode
 
 % considerazioni: Kf è positivo, quindi non darà contributo in termini di
-% sfasamento di fase, zeri < 0, polo doppio nell'origine e coppia di complessi
-% coniugati con pulsazione di risonanza in 2.82 e smorzamento 0.707
+% sfasamento di fase iniziale, zeri < 0, polo doppio nell'origine e coppia di
+% complessi coniugati con pulsazione di risonanza in 2.82 e smorzamento 0.707
 % La fase iniziale vale -180, dovuto al polo doppio nell'origine
 % Il modulo parte scendendo con -40 dB/dec, poi ho l'effetto del primo zero
 % che lo fa risalire un poco, ho l'effetto della coppia di complessi
@@ -36,7 +36,7 @@ damp(F)
 % dei due poli quindi ho pendenza di -60, per finire con l'effetto dello
 % zero che mi fa ritornare a pendenza -40
 %
-% La fase parte da -180, ho un recupero dovuto ai due zeri (+180)e una
+% La fase parte da -180, ho un recupero dovuto ai due zeri (+180) e una
 % perdita (-180)per i due poli c.c., quindi fase finale = -180
 % Per primo trovo zero di pulsazione 1 che fa guadagnare fase, in 2.83 ho i
 % due poli c.c. che fanno perdere 180 e ci metto meno di due decadi perche'
@@ -55,7 +55,6 @@ figure,bode(Ga);
 % attraversando l'asse reale negativo e finendo nell'origine da sopra
 
 figure,nyquist(Ga);
-
 
 %% punto d - verifica stabilità mediante criterio di Nyquist
 
