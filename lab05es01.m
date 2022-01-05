@@ -10,9 +10,9 @@ F=(s^2+11*s+10)/(s^4+4*s^3+8*s^2)
 %
 %                         d1             d2
 %                         |              |
-%    r(s)--->O---> Kc --->O---> F(s) --->O--- y(s) --->
-%            ^                                 |
-%          - |____________ 1/Kr _______________|
+%    r(s)--->O---> Kc --->O---> F(s) --->O----.----> y(s)
+%            ^                                |
+%          - |____________ 1/Kr ______________|
 
 Kr=1;
 
@@ -26,15 +26,16 @@ damp(F)
 
 %% punto b - Bode
 
-% considerazioni: Kf è positivo, quindi non darà contributo in termini di
-% sfasamento di fase iniziale, zeri < 0, polo doppio nell'origine e coppia di
+% Considerazioni: Kf è positivo, quindi non darà contributo in termini di
+% sfasamento di fase iniziale, 2 zeri reali < 0, polo doppio nell'origine e coppia di
 % complessi coniugati con pulsazione di risonanza in 2.82 e smorzamento 0.707
 % La fase iniziale vale -180, dovuto al polo doppio nell'origine
-% Il modulo parte scendendo con -40 dB/dec, poi ho l'effetto del primo zero
-% che lo fa risalire un poco, ho l'effetto della coppia di complessi
-% coniugati che non da' una sovraelongazione apprezzabile, poi ho l'effetto
-% dei due poli quindi ho pendenza di -60, per finire con l'effetto dello
-% zero che mi fa ritornare a pendenza -40
+%
+% Ho 2 zeri reali negativi, il modulo parte scendendo con -40 dB/dec, poi ho l'effetto
+% del primo zero (-20 dB/dec) che lo fa risalire un poco, ho l'effetto della coppia
+% di complessi coniugati che non da' una sovraelongazione apprezzabile dal grafico,
+% poi ho l'effetto dei due poli quindi ho pendenza di -60, per finire con l'effetto dello
+% zero che mi fa ritornare a pendenza -40. Complessivamente il modulo scende sempre
 %
 % La fase parte da -180, ho un recupero dovuto ai due zeri (+180) e una
 % perdita (-180)per i due poli c.c., quindi fase finale = -180
@@ -42,11 +43,11 @@ damp(F)
 % due poli c.c. che fanno perdere 180 e ci metto meno di due decadi perche'
 % il fattore di smorzamento fa stringere questo intervallo di frequenze,
 % poi ho l'effetto dello zero con pulsazione 10 che mi fa guadagnare 90
+figure,bode(F),grid on;
 
 Kc=1;
 Ga=F*Kc/Kr;  %funzione di trasferimento d'anello del sistema in retroazione
-
-figure,bode(Ga);
+figure,bode(Ga),grid on;
 
 %% punto c - Nyquist
 
@@ -58,13 +59,14 @@ figure,nyquist(Ga);
 
 %% punto d - verifica stabilità mediante criterio di Nyquist
 
+% Applicando il criterio di nyquist si vede che il sistema è stabile 
 % Osserviamo che il punto A si trova a destra del punto critico
-% Si nota che N=0 e poichè nia=0, anche nic=0
+% Si nota che N=0 e poichè nia=0 (num poli instabili), anche nic=0
 
-% calcolo diretto
-W=feedback(Kc*F, 1/Kr)  % primo arg. -> ramo diretto, secondo -> ramo in retroazione
+% Verifichiamo calcolando i poli della W(s)
+W=feedback(Kc*F, 1/Kr)  % primo arg. -> ramo DIRETTO, secondo -> ramo in RETROAZIONE 
 damp(W)
-% verifico che tutti i poli abbiano effettivamente parte reale < 0
+% Tutti i poli hanno effettivamente parte reale < 0  --> asintoticamente stabile 
 
 %% punto e - calcolare errore di inseguimento a regime
 
@@ -81,15 +83,12 @@ Wd2=feedback(1,Ga)
 % d1=0.1 costante, ha effetto d1/(Kc/Kr) perche' ci sono poli solo nel blocco a
 % valle del disturbo
 
-errore_r=dcgain(s*We*1/s^2)
+err_r=dcgain(s*We*1/s^2)
 effetto_d1=dcgain(s*Wd1*0.1/s)
 effetto_d2=dcgain(s*Wd2*0.5/s)
-errore_tot=errore_r-(effetto_d1+effetto_d2)
-
-open_system('lab05es1e_errore_inseguimento')
-sim('lab05es1e_errore_inseguimento')
-
-pause;
+err_tot=err_r-(effetto_d1+effetto_d2)   % errore è dato da rif-uscita, quando prendiamo 
+                                        % in considerazione i disturbi abbiamo riferimento 
+pause;                                  % spento  -> err = -uscita
 
 % caso 2
 % r2=2t, errore di inseguimento intrinseco NULLO perche' il sistema e' di tipo 2
@@ -97,13 +96,10 @@ pause;
 % d2=0.01t a rampa, l'effetto sull'uscita e' nullo perche' il sistema e' di
 % tipo 2
 
-errore_r=dcgain(s*We*2/s^2)
+err_r=dcgain(s*We*2/s^2)
 effetto_d1=dcgain(s*Wd1*0)
 effetto_d2=dcgain(s*Wd2*0.01/s^2)
-errore_tot=errore_r-(effetto_d1+effetto_d2)
-
-open_system('lab05es1e_errore_inseguimento')
-sim('lab05es1e_errore_inseguimento')
+err_tot=err_r-(effetto_d1+effetto_d2)
 
 pause;
 
@@ -114,13 +110,10 @@ pause;
 % d1=0
 % d2=0
 
-errore_r=dcgain(s*We*1/s^3)
+err_r=dcgain(s*We*1/s^3)
 effetto_d1=dcgain(s*Wd1*0)
 effetto_d2=dcgain(s*Wd2*0)
-errore_tot=errore_r-(effetto_d1+effetto_d2)
-
-open_system('lab05es1e_errore_inseguimento')
-sim('lab05es1e_errore_inseguimento')
+err_tot=err_r-(effetto_d1+effetto_d2)
 
 pause;
 
@@ -131,10 +124,10 @@ pause;
 % d2=0.2 con effetto sull'uscita nullo perche' ho almeno un polo in 0 a
 % monte del disturbo
 
-errore_r=dcgain(s*We*1/s^3)
+err_r=dcgain(s*We*1/s^3)
 effetto_d1=dcgain(s*Wd1*0.1/s)
 effetto_d2=dcgain(s*Wd2*0.2/s)
-errore_tot=errore_r-(effetto_d1+effetto_d2)
+err_tot=err_r-(effetto_d1+effetto_d2)
 
 open_system('lab05es1e_errore_inseguimento')
 sim('lab05es1e_errore_inseguimento')
