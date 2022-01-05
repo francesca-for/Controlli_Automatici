@@ -43,11 +43,11 @@ damp(F)
 % due poli c.c. che fanno perdere 180 e ci metto meno di due decadi perche'
 % il fattore di smorzamento fa stringere questo intervallo di frequenze,
 % poi ho l'effetto dello zero con pulsazione 10 che mi fa guadagnare 90
-figure,bode(F),grid on;
+figure(1),bode(F),grid on;
 
 Kc=1;
 Ga=F*Kc/Kr;  %funzione di trasferimento d'anello del sistema in retroazione
-figure,bode(Ga),grid on;
+figure(2),bode(Ga),grid on;
 
 %% punto c - Nyquist
 
@@ -55,7 +55,7 @@ figure,bode(Ga),grid on;
 % La fase parte da -180 (da sotto), aumenta inizialmente poi decresce
 % attraversando l'asse reale negativo e finendo nell'origine da sopra
 
-figure,nyquist(Ga);
+figure(3),nyquist(Ga);
 
 %% punto d - verifica stabilità mediante criterio di Nyquist
 
@@ -71,7 +71,6 @@ damp(W)
 %% punto e - calcolare errore di inseguimento a regime
 
 % Calcolo analitico:
-
 We=Kr*feedback(1,Ga)
 Wd1=feedback(F,Kc/Kr)
 Wd2=feedback(1,Ga)
@@ -88,25 +87,30 @@ effetto_d1=dcgain(s*Wd1*0.1/s)
 effetto_d2=dcgain(s*Wd2*0.5/s)
 err_tot=err_r-(effetto_d1+effetto_d2)   % errore è dato da rif-uscita, quando prendiamo 
                                         % in considerazione i disturbi abbiamo riferimento 
-pause;                                  % spento  -> err = -uscita
+                                        % spento  -> err = -uscita
+open_system('lab05es01e1_errore_inseguimento')
+sim('lab05es01e1_errore_inseguimento')
+
+pause;
 
 % caso 2
 % r2=2t, errore di inseguimento intrinseco NULLO perche' il sistema e' di tipo 2
 % d1=0
-% d2=0.01t a rampa, l'effetto sull'uscita e' nullo perche' il sistema e' di
-% tipo 2
+% d2=0.01t a rampa, l'effetto sull'uscita e' nullo perche' il sistema e' di tipo 2 
 
 err_r=dcgain(s*We*2/s^2)
 effetto_d1=dcgain(s*Wd1*0)
 effetto_d2=dcgain(s*Wd2*0.01/s^2)
 err_tot=err_r-(effetto_d1+effetto_d2)
 
+open_system('lab05es01e2_errore_inseguimento')
+sim('lab05es01e2_errore_inseguimento')
+
 pause;
 
 % caso 3
-% r3=t^2/2, errore di inseguimento intrinseco pari a Kr/KGa, con KGa =
-% Kc*Kf/Kr perche' il sistema e' di tipo 2 ed e' posto ad inseguire un
-% riferimento di secondo grado.
+% r3=t^2/2, errore di inseguimento intrinseco pari a Kr/KGa, con KGa = Kc*Kf/Kr 
+% perche' il sistema e' di tipo 2 ed e' posto ad inseguire un riferimento di grado 2 
 % d1=0
 % d2=0
 
@@ -114,6 +118,9 @@ err_r=dcgain(s*We*1/s^3)
 effetto_d1=dcgain(s*Wd1*0)
 effetto_d2=dcgain(s*Wd2*0)
 err_tot=err_r-(effetto_d1+effetto_d2)
+
+open_system('lab05es01e3_errore_inseguimento')
+sim('lab05es01e3_errore_inseguimento')
 
 pause;
 
@@ -129,5 +136,5 @@ effetto_d1=dcgain(s*Wd1*0.1/s)
 effetto_d2=dcgain(s*Wd2*0.2/s)
 err_tot=err_r-(effetto_d1+effetto_d2)
 
-open_system('lab05es1e_errore_inseguimento')
-sim('lab05es1e_errore_inseguimento')
+open_system('lab05es01e4_errore_inseguimento')
+sim('lab05es01e4_errore_inseguimento')
