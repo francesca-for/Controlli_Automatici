@@ -154,7 +154,7 @@ figure,step(W);
 
 
 %% verifica tramite simulazione delle specifiche sugli effetti dei disturbi e err. di inseguimento
-open_system('L_12_05_21_Esercizio_progetto_di_un_controllore_schema');
+open_system('L_21_05_12_Esercizio_progetto_di_un_controllore_schema');
 
 %% 34:30 lezione del 14/05
 

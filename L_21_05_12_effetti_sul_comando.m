@@ -46,4 +46,4 @@ Wu = C*feedback(1,Ga3)   % Wu = C*1/(1+Ga3)
 figure,step(Wu)  % il valore iniziale è anche il massimo, lo ottengo con peak response
 
 %% Attività sul comando - simulato con Simulink
-open_system('L_12_05_21_effetti_sul_comando_schema')
+open_system('L_21_05_12_effetti_sul_comando_schema')
