@@ -38,6 +38,7 @@
 % l'ambiente di lavoro
 clear variables
 close all
+clc
 
 % Poiche' lavoreremo con dft, definiamo la variabile complessa s
 s=tf('s');
@@ -57,10 +58,10 @@ K=1000;
 CIa=K/s;   % controllore di corrente
 
 % Calcoliamo la fdt del sistema chiuso in retroazione (fdt tra Vr,Ia(s) e
-% Ia(s), indicata come FrIa(s)) 
+% Ia(s), indicata come FrIa(s))
 % Manualmente puo' essere calcolata come una funzione razionale fratta:
 % funzioneRamoDiretto / 1-(funzione d'anello)
-% Usiamo il comando  >>  feedback(fdt_ramo_diretto,fdt_retroazione) 
+% Usiamo il comando  >>  feedback(fdt_ramo_diretto,fdt_retroazione)
 % che ci permette di calcolare in maniera "pulita", ovvero effettuando in
 % automatico eventuali cancelazioni zeri-poli
 % il alternativa, se la calcolassi a mano, poi dovrei applicare
@@ -76,8 +77,8 @@ F = FrIa*Km/(J*s+beta)*KD*Kcond
 %  ---->| Kr  |------>O----->| C_omega(s) |------>| F(s) |-----.--->
 %       |_____|    +  | _    |____________|       |______|     |
 %                     |________________________________________|
-% 
-% con:   ydes = Vr,omega    u = Vr,Ia    y= V_omega 
+%
+% con:   ydes = Vr,omega    u = Vr,Ia    y= V_omega
 
 % Simulazione della risposta del sistema ad anello chiuso per diversi
 % controllori, considero un riferimento a gradino unitario.
@@ -121,7 +122,7 @@ damp(W2)
 % grandezza piu' piccola, avranno anche costante di tempo di due ordini di
 % grandezza piu' piccola. Le voluzione dei modi associati a questi poli si
 % esaurisce prima che sia finito il transitorio del polo dominante.
-% Per questo motivo W1 non presenta sovraelongazione 
+% Per questo motivo W1 non presenta sovraelongazione
 % W2 e' caratterizzato da una coppia di poli complessi coniugati, quindi
 % presenta elongazione, che e' elevata perche' presentano un fattore di
 % smorzamento basso (<< di radice(2)/2)
@@ -154,7 +155,7 @@ F = FrIa*Km/(J*s+beta)*KD*Kcond
 
 Kr=1;
 Kp2=0.8;  %   -->   raddoppio, do un'azione di controllo piu' forte
-C_omega1=Kp2; 
+C_omega1=Kp2;
 Ki=2;
 C_omega2= Kp2+Ki/s;
 
@@ -205,7 +206,7 @@ F = FrIa*Km/(J*s+beta)*KD*Kcond
 
 Kr=1;
 Kp3=1.6;  %   -->   raddoppio di nuovo
-C_omega1=Kp3; 
+C_omega1=Kp3;
 Ki=2;
 C_omega2= Kp3+Ki/s;
 
@@ -224,7 +225,7 @@ damp(W2)
 % diminuire la sovraelongazione.
 % Dal grafico possiamo vedere che questo funziona.
 % Cambiando il valore di Kp abbiamo spostato i poli facendo diminuire il
-% fattore di smorzamento 
+% fattore di smorzamento
 
 % Si "intuisce" che continuano ad aumentare Kp possiamo ulteriormente
 % migliorare il valore dell'uscita e diminuire la sovraelongazione ma,
@@ -242,7 +243,7 @@ damp(W2)
 %  ---->| Kr  |------>O----->| C(s) |------>| F(s) |----->O----.--->
 %       |_____|    +  | _    |______|       |______|    +      |
 %                     |________________________________________|
-% 
+%
 % fdt d'anello:  Ga(s) = C(s)*F(s)
 % fdt in catena chiusa:  W(s) = y(s)/r(s);  Wy(s) = y(s)/ydes(s)
 %
@@ -293,4 +294,3 @@ damp(W2)
 % Specifiche sull'errore massimo di inseguimento di segnali sinusoidali in
 % regime permanente corrispondono a garantire una buona precisione
 % all'interno di una banda di pulsazioni di interesse.
-
