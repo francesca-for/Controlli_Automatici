@@ -14,7 +14,7 @@
 
 %% prima parte del file: definizione dei parametri del servomotore
 
-clear all
+clear variables
 close all
 s=tf('s');
 Ra=6;

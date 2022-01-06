@@ -12,7 +12,7 @@
 %       superiore al 25%
 %   *   banda passante pari a circa 6 rad/s con tolleranza 15%
 
-clear all
+clear variables
 close all
 clc
 

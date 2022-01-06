@@ -1,4 +1,4 @@
-clear all
+clear variables
 close all
 s=tf('s');
 F=10/(s*(s+2)*(s+4));

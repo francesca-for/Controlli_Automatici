@@ -36,7 +36,7 @@
 
 % E' utile iniziare il file con clear all e close all per "pulire"
 % l'ambiente di lavoro
-clear all
+clear variables
 close all
 
 % Poiche' lavoreremo con dft, definiamo la variabile complessa s

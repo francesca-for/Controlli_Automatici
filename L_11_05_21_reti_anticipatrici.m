@@ -4,7 +4,7 @@
 %        +  ^       ------        ------    |
 %         - |_______________________________|
 
-clear all
+clear variables
 close all
 clc
 
