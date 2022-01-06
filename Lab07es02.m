@@ -97,7 +97,7 @@ figure,step(W/Kr)        %  OPPURE NORMALIZZO RISPETTO A Kr
 % overshoot 26%, quindi soddisfa le specifiche
 % ts = 0.93, accettabile pure questo
 
-open_system('Lab07es02_schema');
+open_system('lab07es02_schema');
 
 %% Parte 2
 

@@ -86,7 +86,7 @@ W = feedback(C*F,1/Kr);
 
 figure,bode(W)  % picco = 1.7 e wb = 5.7, entrambe le specifiche sono soddisfatte
 
-open_system('Lab07es01_schema')
+open_system('lab07es01_schema')
 
 %% Parte 2
 

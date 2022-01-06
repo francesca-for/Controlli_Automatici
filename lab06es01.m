@@ -101,8 +101,8 @@ effetto_d1 = dcgain(s*Wd1*0.1/s)
 effetto_d2 = dcgain(s*Wd2*0.5/s)
 errore_tot = errore_r - (effetto_d1 + effetto_d2)
 
-open_system('lab06es01_e1')
-sim('lab06es01_e1')
+open_system('lab06es01e1_schema')
+sim('lab06es01e1_schema')
 
 
 %% caso 2:
@@ -116,7 +116,7 @@ effetto_d1 = dcgain(s*Wd1*0)
 effetto_d2 = dcgain(s*Wd2*0.01/s^2)
 errore_tot = errore_r - (effetto_d1 + effetto_d2)
 
-open_system('lab06es01_e2')
-sim('lab06es01_e2')
+open_system('lab06es01e2_schema')
+sim('lab06es01e2_schema')
 
 % da Symulink l'errore risulta nullo --->  WTF??
