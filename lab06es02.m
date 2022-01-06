@@ -1,4 +1,4 @@
-clear all
+clear variables
 close all
 clc
 
@@ -102,8 +102,8 @@ effetto_d2 = dcgain(s*Wd2*0.5/s)
 
 errore_tot = errore_r - (effetto_d1 + effetto_d2)
 
-open_system('lab06es02_e1')
-sim('lab06es02_e1')
+open_system('lab06es02e1')
+sim('lab06es02e1')
 
 %% caso 2
 
@@ -118,5 +118,5 @@ effetto_d2 = dcgain(s*Wd2*0.01/s^2)
 
 errore_tot = errore_r - (effetto_d1 + effetto_d2)
 
-open_system('lab06es02_e2')
-sim('lab06es02_e2')
+open_system('lab06es02e2')
+sim('lab06es02e2')
