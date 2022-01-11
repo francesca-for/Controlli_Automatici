@@ -1,7 +1,8 @@
 clear variables
 close all
-s = tf('s');
+clc
 
+s = tf('s');
 F1 = 1/(s*(s+2)*(s+4));
 Kf1 = dcgain(s*F1)  % calcolo guadagno stazionario
 bode(F1);
