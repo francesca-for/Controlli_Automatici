@@ -7,7 +7,7 @@ Kf1 = dcgain(s*F1)  % calcolo guadagno stazionario
 bode(F1);
 
 %%
-F2 = 10/s*F1; % E' di tipo 2. Poli in 0(2), -2, -4
+F2 = 10/s*F1; % E' di tipo 2. Poli in 0 (doppio), -2, -4
 Kf2 = dcgain(s^2*F2)
 % phi_0 = -90*2 = -180
 % phi_inf = -180-90*2 = -360
@@ -21,8 +21,8 @@ figure,bode(F2);
 % al numeratore non è immediatamente apprezzabile.
 
 %%
-F3 = F2*(s+1); % la funzione ha uno zero reale negativo in -1, poli reali 
-               % in 0(2), -2, -4
+F3 = F2*(s+1); % la funzione ha uno zero reale negativo in -1, poli reali
+               % in 0 (doppio), -2, -4
 Kf3 = dcgain(s^2*F3)
 % phi_0 = -90*2 + fase(Kf3) = -180
 % phi_inf = -180+90-90*2 = -270   ho un aumento di fase e poi una
@@ -34,4 +34,3 @@ figure,bode(F3);
 % Il diagramma polare parte da un asintoto a -180 DA SOTTO (il grafico
 % della fase va sopra i -180), poi risale e arriva nell'origine dall'alto,
 % a 170°. Ho un attraversamento dell'asse reale negativo
-
