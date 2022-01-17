@@ -49,7 +49,7 @@ md2=4;
 figure,bode((1+s)/(1+s/md2))
 xd2=1.16;
 tau_d2 = xd2/wc;
-Rd2 = (1+tau_d2*s)/(1+tau_d2/md2*s)  %#ok<*NOPTS> % RETE DERIVATIVA con md=4 centrata sum massimo recupero di fase e con wc=3.8
+Rd2 = (1+tau_d2*s)/(1+tau_d2/md2*s)  % RETE DERIVATIVA con md=4 centrata sum massimo recupero di fase e con wc=3.8
 
 Ga2 = Ga1 * Rd1 * Rd2;  % in questo caso ho due diverse reti Rd1 e Rd2
 figure,margin(Ga2)
