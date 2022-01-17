@@ -7,7 +7,7 @@
 
 % progettare C(s) in modo che il sistema in caten chiusa soddisfi le
 % seguenti specifiche:
-%   *   |er,inf| < 0.2 per r(t)=t
+%   *   |er,inf| <= 0.2 per r(t)=t
 %   *   sovraelongazione massima della risposta al gradino unitario non
 %       superiore al 25%
 %   *   banda passante pari a circa 6 rad/s con tolleranza 15%

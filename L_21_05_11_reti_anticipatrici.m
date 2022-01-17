@@ -16,7 +16,7 @@ Kr=1;
 % progettare C(s) in modo che il sistema in caten chiusa soddisfi le
 % seguenti specifiche:
 % - statiche
-%   *   |er,inf| < 0.2 per r(t)=t
+%   *   |er,inf| <= 0.2 per r(t)=t
 % - dinamiche
 %   *   ts della risposta al gradino unitario pari a circa 0.4s con tolleranza
 %       di +-15%
@@ -113,5 +113,5 @@ figure,step(W);     % simulo la risposta al gradino
 %    -----      ----   + ^       -----        -----    |
 %                      - |_____________________________|
 
-
+%%
 open_system('L_21_05_11_reti_anticipatrici_schema');
