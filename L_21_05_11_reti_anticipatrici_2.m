@@ -20,6 +20,7 @@ s=tf('s');
 F=10/(s*(s+2)*(s+4))  % di tipo 1, ha solo un polo nell'origine
 Kf=dcgain(s*F)   % Kf = 10/8
 Kr=1;
+
 Kc = Kr/(Kf*0.2)   % come nell'esempio precedente
 
 % Kc>0 per garantire la stabilizzabilita' del sistema (con C(s) stabile)
