@@ -6,7 +6,7 @@ s=tf('s');
 
 Ga=1e6*(s+2)*(s+20)/(s^2*(s+1)*(s+200)*(s+500));
 Kga=dcgain(s^2*Ga)
-bode(Ga)
+bode(Ga), grid on
 figure,nyquist(Ga)
 figure,margin(Ga)
 

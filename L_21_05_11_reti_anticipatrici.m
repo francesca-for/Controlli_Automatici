@@ -33,17 +33,18 @@ Kr=1;
 Kc = Kr/(Kf*0.2)
 % il segno di Kc si sceglie POSITIVO per garantire la stabilizzabilita' del
 % sistema (con C(s) stabile)
-bode(F)
+figure,bode(F),grid on
 % dal diagramma di bode vediamo che abbiamo una sola pulsazione di crossover
-% e una sola pulsazione alla quale la fase vale -180
-% il sistema è quindi a stabilita' regolare e possiamo scegliere Kc > 0
+% e una sola pulsazione alla quale la fase vale -180, non abbiamo
+% singolarità a parte reale positiva e Kf>0, 
+% => il sistema è quindi a stabilita' regolare e possiamo scegliere Kc > 0
 
 % analizziamo ora le specifiche dinamiche
 ts = 0.4    % con tolleranza 15%  =>  0.34 ≤ ts ≤ 0.46
 % con l'approssimazione con dinamica dominante del secondo ordine , abbiamo che
-% w_b * ts ≈ 3
-w_b = 3 / ts
-w_cd = w_b * 63/100
+% wb * ts ≈ 3
+wb = 3 / ts
+wcd = wb * 63/100
 % specifica sulla sovraelongazione massima non superiore al 25%
 % Mr ≤ (1+s^)/0.9
 Mr_max = (1+0.25)/0.9
@@ -51,14 +52,12 @@ Mr_max = (1+0.25)/0.9
 % e considero la relazione approssimata per capire se il valore trovato è
 % significativamente superiore al minimo di Nichols
 mf_min = 60-5*(20*log10(Mr_max))
-pause;
-
 
 %% ---- Ora possimo impostare il progetto in matlab ----
 
 % definiamo la funzione d'anello di partenza
 Ga1 = Kc*F;  % Kc = 4, valore minimo ammissibile e eventualmente aumentabile successivamente
-bode(Ga1)
+figure,bode(Ga1),grid on
 % vediamo cosa succede alla w_c desiderata
 % M = -11.4 ,    fase = -206
 % se voglio avere il margine di fase trovato prima devo recuperare fase,
@@ -66,32 +65,32 @@ bode(Ga1)
 % Affinche' la pulsazione sia di crossover, il modulo dovra' valere 0, quindi
 % devo recuperare 11,4 gradi
 
-% poiche' devo recuperare sia modulo che fase posso usare reti anticipatrici
+% Poiche' devo recuperare sia modulo che fase posso usare reti anticipatrici
 % ne servono due perchè devo recuperare piu' di 60 gradi
-% dalla carta vedo che possousare due reti (4) che fanno recuperare ≈ 35
-% e devo centrearle in modo da avere il massimo alla wc di crossover
+% Dalla carta vedo che posso usare due reti da 4 che fanno recuperare ≈ 35
+% e devo centrarle in modo da avere il massimo alla wc di crossover
 % max = sqrt(md)
 % Devo prima controllare che l'aumento di modulo sia compatibile -> vedo che
 % l'aumento in corrispondenza della w=2 della rete (4) vale 6 dB, quindi
 % con 2 reti avro' un aumento di circa 12. Essendo leggermente piu' grande di
 % quello che mi serviva, la w_c sara' leggermente superiore a quella attesa.
 
-md1=4;
-figure,bode((1+s)/(1+s/md1))    % questa funziona ha l'espressione della rete anticipatrice con tau_d = 1
+md=4;
+figure,bode((1+s)/(1+s/md))    % questa funziona ha l'espressione della rete anticipatrice con tau_d = 1
 % mi da' le stesse informazioni che avevo trovato in modo approssimativo sui fogli delle reti, ma piu' precise
-w_tau = sqrt(md1);
-tau_d1 = w_tau/w_cd
-Rd1 = (1+tau_d1*s)/(1+tau_d1/md1*s)  % RETE DERIVATIVA con md=4 centrata sum massimo recupero di fase e con w_cd=4.7
+w_tau = sqrt(md);
+tau_d1 = w_tau/wcd
+Rd = (1+tau_d1*s)/(1+tau_d1/md*s)  % RETE DERIVATIVA con md=4 centrata sum massimo recupero di fase e con wcd=4.7
 
 % poiche' le due reti sono identiche, posso inserirla direttamente dicendo che la nuova funzione d'anello:
-Ga2 = Ga1 * Rd1^2;
+Ga2 = Ga1 * Rd^2;
 
 figure,margin(Ga2)  % a questo punto, quando non devo piu' inserire nulla nella
                     % parte dinamica del controllore e dovrei avere la funzione
                     % d'anello finale, mi conviene usare il comando margin
 
 % A questo punto posso definire la funzione C completa
-C = Kc * Rd1^2
+C = Kc * Rd^2
 % potrei usare direttamente feedback con Ga2, ma in questo modo ho tutto pronto per fare la verifica su simulink
 
 W=feedback(C*F,1);
@@ -113,3 +112,6 @@ figure,step(W);     % simulo la risposta al gradino
 %   | rif |--->| Kr |--->O--.-->|  C  |--.-->|  F  |---.----[uscita]
 %    -----      ----   + ^       -----        -----    |
 %                      - |_____________________________|
+
+
+open_system('L_21_05_11_reti_anticipatrici_schema');
