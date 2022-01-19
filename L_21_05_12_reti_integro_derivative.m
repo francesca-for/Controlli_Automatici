@@ -17,8 +17,9 @@ Kr = 1
 Kc = 4  % minimo valore ammissibile e la funzione d'anello di partenza e' di nuovo data da
 Ga1 = Kc*F  % = 40/(s*(s+2)*(s+4))
 % La specifica sulla sovraelongazione massima implica mf_min = 43 - 45
+mf = 45
 % La nuova specifica sulla banda passante implica 2.72 <= wB <= 3.68 rad/s
-%               ->  wc = 0.63 * wB_des = 2 rad/s
+%       ->  wc = 0.63 * wB_des = [1.71, 2.31] rad/s
 
 % Nell'esercizio svolto su carta (vedi appunti, pag. 199) avevamo utilizzato una rete derivativa da 3
 % e una rete integrativa con mi = 3 (2.8 sulle slide)
@@ -59,3 +60,6 @@ C = Kc * Rd * Ri;
 W = feedback(C*F,1);
 figure,bode(W)  % per specifica sulla banda passante
 figure,step(W)  % per specifica sulla risposta al gradino
+
+%%
+open_system('L_21_05_12_reti_integro_derivative_schema');

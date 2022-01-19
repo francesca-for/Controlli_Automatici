@@ -18,7 +18,7 @@ G=8*(1+0.5*s)/((1+2*s)^2*(1+0.125*s)^2)
 % Wgm è la wpi a cui leggiamo il margine di guadagno
 % Wpm è la pulsazione a cui leggiamo il fargine di fase
 
-% vediamo che Gm = 11.8753 è finito quindi possiamo applicare i metodi di taratura in catena chiusa e corrisponde a Kpbar
+% vediamo che Gm = 11.8753 (21.4929 dB) è finito quindi possiamo applicare i metodi di taratura in catena chiusa e corrisponde a Kpbar
 Kpbar=Gm
 Tbar=2*pi/Wgm
 
@@ -29,11 +29,16 @@ Kp = 0.6*Kpbar
 TI = 0.5*Tbar
 TD = 0.125*Tbar
 
-N=10;
+N=10;  % il polo di chiusura deve essere ad una frequenza molto maggiore di quella della banda
+% valori tipici di N compresi tra 5 e 20
+pc = TD*s/(1+TD/N*s)
+pole(pc)
 
 Rpid = Kp*(1+1/(TI*s)+TD*s/(1+TD/N*s));
-Ga = Rpid*G;
+Ga = Rpid*G
+pole(Ga)  % vediamo che sono tutti stabili
 figure,margin(Ga)
+
 W = feedback(Ga,1)
 figure,step(W)
 % Vedo che il margine di fase è di soli 23 gradi, devo prevedere di avere oscillazioni grandi durante il transitorio
@@ -45,7 +50,7 @@ figure,step(W)
 % abbiamo che i margini del sistema crescono molto
 % Gm = 6.15 dB
 % Pm = 58.7
-% la sovraelongazione scende al 17% ma il tempo di salita cresce a 0.73 s
+% la sovraelongazione scende al 17% ma il tempo d i salita cresce a 0.73 s
 % il tempo di assestamento non cambia perché non abbiamo cambiato i parametri del controllore e i poli in catena chiusa sono gli stessi
 
 
