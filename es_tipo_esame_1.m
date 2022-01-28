@@ -18,7 +18,7 @@ Kga1 = dcgain(F1*s*F2/Kr)
 % sistema di tipo 1, non devo aggiungere poli in 0 nel controllore
 % err = Kr/Kga
 Kc1 = Kr/(Kga1*0.1)
-% effetto di d1 limitato --> eff_d1 = 1/Kc*Kf1  --> 
+% effetto di d1 limitato --> eff_d1 = 1/(Kc*Kf1)  --> 
 Kc2 = 1/(Kf1*0.05)
 % effetto di d2 = 0 perchè ho un polo nei blocchi a monte
 Kc = max(Kc1,Kc2)     % ---> poichè Kc = 40, eff_d1 = 1/(Kf1*Kc) = 0.0125
