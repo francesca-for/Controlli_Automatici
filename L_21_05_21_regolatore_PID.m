@@ -77,7 +77,7 @@ figure,step(W)
 %% Taratura con metodo di Ziegler-Nichols ad anello aperto
 
 % Posso applicare i metodi in anello aperto perche' il sistema e'
-% asintoticamete stabil, privo di poli nell'origine e ha solo poli a Re<0
+% asintoticamete stabile, privo di poli nell'origine e ha solo poli a Re<0
 % (se avesse un polo in s=0 non sarebbe BIBO stabile) e non presenta
 % sovraelongazione
 

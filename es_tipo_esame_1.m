@@ -36,21 +36,21 @@ Ga2 = Kc/Kr*F1*F2
 
 wb = 20;
 wc = 0.63*wb
-wc = 13  % approssimata
+wc = 12.6  % approssimata
 
 Mr = (1+0.2)/0.9;
 Mr_dB = 20*log10(Mr)
 mf = 60 - 5*(Mr_dB)
 % fase minima da nichols = circa 42 gradi
-mf = 45;   % approssimata
+mf = 48;   % approssimata
 %%
 figure, bode(Ga2),grid on
 [m,f] = bode(Ga2, wc)
 %%
-% devo guadagnare 50 gradi circa
+% devo guadagnare 51+ gradi
 md = 12;
 figure,bode((1+s)/(1+s/md)), grid on
-xd = 1.6;
+xd = 2;
 taud = xd/wc;
 
 Rd = (1+s*taud)/(1+s*taud/md)
@@ -58,9 +58,9 @@ Rd = (1+s*taud)/(1+s*taud/md)
 Ga3 = Ga2 * Rd
 [m3,f3] = bode(Ga3,wc)
 %% 
-mi = 1.8;
+mi = 2.2;
 figure,bode((1+s/mi)/(1+s)), grid on
-xi = 20;
+xi = 50;
 taui = xi/wc;
 Ri = (1+s*taui/mi)/(1+s*taui)
 %%
@@ -71,7 +71,7 @@ figure,margin(Ga4),grid on
 C = Kc*Rd*Ri;
 W = feedback(C*F1*F2,1/Kr);
 
-figure,step(W);
+figure,step(W), grid on;
 figure,bode(W),grid on;
 
 %%
@@ -84,3 +84,62 @@ sens = feedback(1,Ga4);
 
 [m_sens, f_sens] = bode(sens,wr_sin);
 err_max_sin = Kr * m_sens
+
+%% 1.3) Discretizzazione
+wb = 21.2
+T = 2*pi/(20*wb)
+T = 0.01;  % approssimato
+
+Gazoh = Ga4/(1+s*T/2);
+figure,margin(Gazoh);
+
+Cz = c2d(C, T, 'tustin')
+
+%% analisi della risposta al gradino del sistema discretizzato
+open_system('es_tipo_esame_1_schema');
+
+
+
+%% ESERCIZIO 2
+
+clear variables
+close all
+clc
+s = tf('s');
+
+Ga = 3*(1+s)*(1+s/2)/((1-s)*(1+s/15)*(1+s/45))
+Kga = dcgain(Ga)
+figure,nyquist(Ga)
+
+
+%% ESERCIZIO 3
+
+clear variables
+close all
+clc
+s = tf('s');
+
+F = (4*s^2+1200*s+90000)/(s^3+154*s^2+5600*s+20000)
+
+% Posso utilizzare metodo di taratura in anello aperto perchè il sistema è
+% già asintoticamente stabile e non presenta sovraelongazione
+
+Kf = 4.5;
+thetaf = 0.01;
+tauf = 0.26-thetaf;
+
+N=10;
+
+Kp = 1.2*tauf/(Kf*thetaf)
+Ti = 2*thetaf
+Td = 0.5*thetaf
+
+PID = Kp*(1+1/(Ti*s)+Td*s/(1+Td*s/N))
+
+%% sovraelongazione e ts
+
+W = feedback(PID*F,1);
+figure,step(W/dcgain(W)),grid on;
+
+% sovraelongazione del 40.1%
+% ts = 0.0202
